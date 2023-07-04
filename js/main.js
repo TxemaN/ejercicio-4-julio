@@ -1,7 +1,4 @@
-const formulario = document.querySelector("#pelisForm")
-const titulillo = document.querySelector("#titulo")
-const directorcillo = document.querySelector("#director")
-const generozuelo = document.querySelector("#genero")
+const form = document.querySelector("#pelisForm")
 const boton = document.querySelector('#boton')
 
 const arrayPelisUsuario=[{}]
@@ -12,7 +9,7 @@ let elemento = {
   anio: "",
   genero: "",
 }
-formulario.addEventListener('submit',(ev)=>{
+form.addEventListener('submit',(ev)=>{
 		ev.preventDefault()
 		validar();
 	});
@@ -20,10 +17,10 @@ formulario.addEventListener('submit',(ev)=>{
 
   const validar=()=>{
 
-		elemento.titulo=titulillo.value;
-		elemento.director=directorcillo.value;
+		elemento.titulo=document.getElementById("titulo").value;
+		elemento.director=document.getElementById("director").value;
     elemento.anio=document.getElementById("anio").value;
-    elemento.genero=generozuelo.value;
+    elemento.genero=document.getElementById("genero").value;
     arrayPelisUsuario.push(arrayPelisUsuario)
 
 		
