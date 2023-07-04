@@ -24,11 +24,11 @@ formulario.addEventListener('submit',(ev)=>{
 		elemento.director=directorcillo.value;
     elemento.anio=document.getElementById("anio").value;
     elemento.genero=generozuelo.value;
-    return arrayPelisUsuario.push(arrayPelisUsuario)
+    arrayPelisUsuario.push(arrayPelisUsuario)
 
 		
 		}
 
 
 
-console.log(validar())
+console.log(arrayPelisUsuario,elemento)
