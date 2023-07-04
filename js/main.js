@@ -1,10 +1,9 @@
-
-const form = document.querySelector('#pelisForm');
+const form = document.querySelector("#pelisForm")
+const boton = document.querySelector('#boton')
 const titulo = document.querySelector('#titulo');
 const director = document.querySelector('#director');
 const anio = document.querySelector('#anio');
 const errores = document.querySelector('#listaErrores');
-
 const regExp ={
     expresionTitulo: /[a-zÑ-ÿ0-9\-\_\*\+\@\#\~\$\,\´]+$/i, // Corrección en la expresión. Estaba incompleta.
     expresiondirector: /[a-zÑ-ÿ]/i, // Corrección en la expresión.
@@ -12,16 +11,23 @@ const regExp ={
 
 const fragmentPelis = document.createDocumentFragment();
 
-arrayPelisUsuario = [{}];
+const arrayPelisUsuario=[{}]
 
-form.addEventListener('submit', (ev) => {
-    ev.preventDefault()
-    let mensaje = ''
+let elemento = {
+  titulo: "",
+  director: "",
+  anio: "",
+  genero: "",
+}
+form.addEventListener('submit',(ev)=>{
+		ev.preventDefault()
+		validar();
+  let mensaje = ''
     const titulo = titulo.value;
     const director = director.value;
     const anio = anio.value;
-
-    if (titulo.length == 0) {
+	});
+ if (titulo.length == 0) {
         mensaje += '<li>No has nombrado película<li>'
     }
     if (director.length == 0) {
@@ -33,11 +39,22 @@ form.addEventListener('submit', (ev) => {
     if (mensaje !=''){
         errores.innerHTML=mensaje
 }else {
-    form.submit()
-}
-})
+    
+
+
+  const validar=()=>{
+
+		elemento.titulo=document.getElementById("titulo").value;
+		elemento.director=document.getElementById("director").value;
+    elemento.anio=document.getElementById("anio").value;
+    elemento.genero=document.getElementById("genero").value;
+    arrayPelisUsuario.push(arrayPelisUsuario)
+
+		
+		}}
 
 
 
+console.log(arrayPelisUsuario,elemento)
 
 
