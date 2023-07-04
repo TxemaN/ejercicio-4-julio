@@ -11,9 +11,27 @@
 
     <main></main>
 
+    <form action="" method="get" id="pelisForm" name="pelisForm">
+        <label for="titulo">Título</label>
+        <input type="text" id="titulo" placeholder="Escriba el título..">
+        <label for="director">Director</label>
+        <input id=director type="text" placeholder="Nombre del director..">
+        <label for="anio">Año</label>
+        <input id="anio" type="number" placeholder="Ej: 1999">
+        <label for="genero">Género</label>
+        <select name="genero" id="genero">
+            <option value="" disabled selected hidden>Elige un género</option>
+            <option value="terror">Terror</option>
+            <option value="drama">Drama</option>
+            <option value="comedia">Comedia</option>
+            <option value="accion">Acción</option>
+        </select>
+        <input type="submit" id="boton">
+    </form>
+
     <footer></footer>
 
-    
+
     <script src="js/main.js"></script>
 </body>
 </html>
