@@ -3,11 +3,11 @@ const form = document.querySelector('#pelisForm');
 const titulo = document.querySelector('#titulo');
 const director = document.querySelector('#director');
 const anio = document.querySelector('#anio');
-const errores = document.querySelector('#listaErrores')
+const errores = document.querySelector('#listaErrores');
 
-regExp ={
-    expresionTitulo = [a-zA-ZÑ-ÿ0-9\-\_\*\+\@\#\~\$]
-    expresiondirector = [a-zA-ZÑ-ÿ]/i
+const regExp ={
+    expresionTitulo: /[a-zÑ-ÿ0-9\-\_\*\+\@\#\~\$\,\´]+$/i, // Corrección en la expresión. Estaba incompleta.
+    expresiondirector: /[a-zÑ-ÿ]/i, // Corrección en la expresión.
 }
 
 const fragmentPelis = document.createDocumentFragment();
