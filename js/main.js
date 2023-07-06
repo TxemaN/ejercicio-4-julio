@@ -23,7 +23,7 @@ const empujar = () => {
   elemento.director = document.getElementById("director").value;
   elemento.anio = document.getElementById("anio").value;
   elemento.genero = document.getElementById("genero").value;
-  arrayPelisUsuario.push(elemento)
+  arrayPelisUsuario + arrayPelisUsuario.push(elemento)
 
 
 }
