@@ -9,8 +9,8 @@ const listaErrores = document.querySelector('#listaErrores');
 const contenedorPelis = document.querySelector("#contenedor-pelis");
 
 const regExp = {
-  titulo: /[a-zÑ-ÿ0-9\-\_\*\+\@\#\~\$\,\´]+$/i, // Corrección en la expresión. Estaba incompleta.
-  director: /^[a-zÑ-ÿ\s]+$/i,
+  titulo: /[a-zA-Z0-9\s]/i
+  director: /^[a-zA-Z\s]$/i,
   anio: /^\d{4}$/
 }
 
@@ -19,16 +19,9 @@ const fragment = document.createDocumentFragment();
 
 /// ARRAYS --->>>
 
-const arrayPelisUsuario = []
+const arrayPelis = []
 
 const arrayGeneros = ['Terror', 'Comedia', 'Romántica', 'Drama']
-
-let elemento = {
-  titulo: "",
-  director: "",
-  anio: "",
-  genero: "",
-}
 
 
 /// EVENTOS --->>>
@@ -36,8 +29,7 @@ let elemento = {
 form.addEventListener('submit', (ev) => {
   ev.preventDefault()
   const validado = validar();
-if(validado)almacenarPelis() //cuando una if solo ejecuta UNA instruccion no necesita {}
-
+  if (validado) almacenarPelis() //cuando una if solo ejecuta UNA instruccion no necesita {}
 
 });
 
@@ -73,24 +65,21 @@ const validar = () => {
 
 const almacenarPelis = () => {
 
-  const pelicula ={
-  titulo: document.querySelector('#titulo').value,
+  const storedTitulo = document.querySelector('#titulo')
+  const storedDirector = document.querySelector('#director')
+  const storedAnio = document.querySelector('#anio')
+  const storedGenero = document.querySelector('#genero')
 
-}
-}
-
-//Aquí usamos el array de pelis para las tablas con las pelis, el género, año...//
-const pintarPelis = (arrayPelis) => {
-  arrayPelis.forEach((item) => {
-
-
-
-    /*  peli.append(datoPeli);
-  
-      fragment.append(peli);*/
-  })
-
-  //contenedorPelis.append(fragment);
+  const pelicula = {
+    titulo: storedTitulo,
+    director: storedDirector,
+    anio: storedAnio,
+    genero: storedGenero
+  }
+  if (arrayPelis != ) {
+    arrayPelis.push(pelicula)
+  }
+  form.reset()
 }
 
 const crearOption = (...arrayValores) => {
@@ -102,6 +91,20 @@ const crearOption = (...arrayValores) => {
     opciones.text = item;
     fragment.append(opciones)
   })
+  return fragment
+}
+
+const pintarPelis = (arrayPelis) => {
+  arrayPelis.forEach((item) => {
+let opciones = document.createElement('OPTION')
+
+opciones.value = item;
+opciones.text =item
+
+
+    fragment.append(opciones)
+  })
+
   return fragment
 }
 
