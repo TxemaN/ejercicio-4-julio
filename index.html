@@ -1,15 +1,45 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ejercicio 4 de Julio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/mystyle.css">
 </head>
-<body>
-    <header></header>
 
-    <main></main>
+<body>
+    <header>
+        <h1>Formulario</h1>
+    </header>
+
+    <main class = "grid-container">
+        <form action="" id="pelisForm" method="get">
+            <label for="titulo">Título:</label>
+            <input id="titulo" type="text" placeholder="Escriba el título..">
+            <label for="director">Director:</label>
+            <input id=director type="text" placeholder="Nombre del director..">
+            <label for="anio">Año:</label>
+            <input id="anio" type="number" placeholder="Ej: 1999">
+            <label for="genero">Género:</label>
+            <select name="genero" id="genero">
+                <option value="" disabled selected hidden>Elige un género</option>
+                <option value="terror">Terror</option>
+                <option value="drama">Drama</option>
+                <option value="comedia">Comedia</option>
+                <option value="accion">Acción</option>
+            </select>
+
+            <ul id='listaErrores'></ul>
+            
+            <input type="submit" value="Añadir a la Lista">
+
+        </form>
+
+    </main>
 
     <form action="" method="get" id="pelisForm" name="pelisForm">
         <label for="titulo">Título</label>
@@ -53,4 +83,5 @@
 
     <script src="js/main.js"></script>
 </body>
+
 </html>

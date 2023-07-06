@@ -1,0 +1,54 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+}
+
+header {
+    margin-top: 30px;
+}
+
+header,
+main,
+footer {
+    display: grid;
+    place-items: center;
+}
+
+form {
+    display: grid;
+    gap: 1rem;
+    width: 80%;
+}
+
+label {
+    font-weight: bold;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 0.5rem;
+    border-radius: 5px;
+}
+
+input[type="submit"] {
+    background-color: #212121;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.grid-container {
+    display: grid;
+    place-items: center;
+    height: 100vh;
+    font-family: 'Montserrat', sans-serif;
+    background-color: #f0f0f0;
+}
