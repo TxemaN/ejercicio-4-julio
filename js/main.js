@@ -1,5 +1,6 @@
 const form = document.querySelector("#pelisForm")
 const boton = document.querySelector('#boton')
+
 const titulo = document.querySelector('#titulo');
 const director = document.querySelector('#director');
 const anio = document.querySelector('#anio');
@@ -11,7 +12,11 @@ const regExp ={
 
 const fragmentPelis = document.createDocumentFragment();
 
-const arrayPelisUsuario=[{}]
+const contenedorPelis = document.querySelector("#contenedor-pelis");
+
+
+
+const arrayPelisUsuario = [{}]
 
 let elemento = {
   titulo: "",
@@ -19,9 +24,11 @@ let elemento = {
   anio: "",
   genero: "",
 }
+
 form.addEventListener('submit',(ev)=>{
 		ev.preventDefault()
 		validar();
+   empujar();
   let mensaje = ''
     const titulo = titulo.value;
     const director = director.value;
@@ -40,21 +47,42 @@ form.addEventListener('submit',(ev)=>{
         errores.innerHTML=mensaje
 }else {
     
+}
+
+ 
+});
 
 
-  const validar=()=>{
+//Aquí empujamos los datos de la pel al array//
+const empujar = () => {
 
-		elemento.titulo=document.getElementById("titulo").value;
-		elemento.director=document.getElementById("director").value;
-    elemento.anio=document.getElementById("anio").value;
-    elemento.genero=document.getElementById("genero").value;
-    arrayPelisUsuario.push(arrayPelisUsuario)
-
-		
-		}}
-
+  elemento.titulo = document.getElementById("titulo").value;
+  elemento.director = document.getElementById("director").value;
+  elemento.anio = document.getElementById("anio").value;
+  elemento.genero = document.getElementById("genero").value;
+  arrayPelisUsuario + arrayPelisUsuario.push(elemento)
 
 
 console.log(arrayPelisUsuario,elemento)
+		
+		
+}
+
+//Aquí usamos el array de pelis para las tablas con las pelis, el género, año...//
+const pintarPelis = () => {
+  arrayPelisUsuario.forEach((item) => {
+
+    document.getElementById("tituloTabla").textContent=item.titulo;
+    document.getElementById("directorTabla").textContent=item.director;
+    document.getElementById("anioTabla").textContent=item.anio;
+    document.getElementById("generoTabla").textContent=item.genero;
+
+
+    peli.append(datoPeli);
+
+    fragment.append(peli);
+  })
+  contenedorPelis.append(fragment);
+}
 
 
