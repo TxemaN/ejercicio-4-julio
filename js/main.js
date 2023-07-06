@@ -9,7 +9,7 @@ const listaErrores = document.querySelector('#listaErrores');
 const contenedorPelis = document.querySelector("#contenedor-pelis");
 
 const regExp = {
-  titulo: /[a-zA-Z0-9\s]/i
+  titulo: /[a-zA-Z0-9\s]/i,
   director: /^[a-zA-Z\s]$/i,
   anio: /^\d{4}$/
 }
@@ -76,7 +76,7 @@ const almacenarPelis = () => {
     anio: storedAnio,
     genero: storedGenero
   }
-  if (arrayPelis != ) {
+  if (arrayPelis != 'Filtra por género') {
     arrayPelis.push(pelicula)
   }
   form.reset()
@@ -96,12 +96,10 @@ const crearOption = (...arrayValores) => {
 
 const pintarPelis = (arrayPelis) => {
   arrayPelis.forEach((item) => {
-let opciones = document.createElement('OPTION')
+    let opciones = document.createElement('OPTION')
 
-opciones.value = item;
-opciones.text =item
-
-
+    opciones.value = item;
+    opciones.text = item
     fragment.append(opciones)
   })
 
