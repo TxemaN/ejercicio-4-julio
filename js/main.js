@@ -10,18 +10,18 @@ const contenedorPelis = document.querySelector("#contenedor-pelis");
 
 const regExp = {
   titulo: /[a-zA-Z0-9\s]/i,
-  director: /^[a-zA-Z\s]$/i,
+  director: /^[a-zA-Z\s]/i,
   anio: /^\d{4}$/
-}
+};
 
 const fragment = document.createDocumentFragment();
 
 
 /// ARRAYS --->>>
 
-const arrayPelis = []
+const arrayPelis = [];
 
-const arrayGeneros = ['Terror', 'Comedia', 'Romántica', 'Drama']
+const arrayGeneros = ['Terror', 'Comedia', 'Romántica', 'Drama'];
 
 
 /// EVENTOS --->>>
@@ -30,9 +30,15 @@ form.addEventListener('submit', (ev) => {
   ev.preventDefault()
   const validado = validar();
   if (validado) almacenarPelis() //cuando una if solo ejecuta UNA instruccion no necesita {}
-
+  pintarPelis(arrayPelis)
 });
 
+listaGeneros.addEventListener('change', (ev) => {
+  if (ev.target.matches('listaGeneros')) {
+    crearOption(opciones.value)
+    console.log(crearOption)
+}
+})
 
 
 /// FUNCIONES --->>>
@@ -71,10 +77,10 @@ const almacenarPelis = () => {
   const storedGenero = document.querySelector('#genero')
 
   const pelicula = {
-    titulo: storedTitulo,
-    director: storedDirector,
-    anio: storedAnio,
-    genero: storedGenero
+    titulo: storedTitulo.value,
+    director: storedDirector.value,
+    anio: storedAnio.value,
+    genero: storedGenero.value
   }
   if (arrayPelis != 'Filtra por género') {
     arrayPelis.push(pelicula)
@@ -83,30 +89,43 @@ const almacenarPelis = () => {
 }
 
 const crearOption = (...arrayValores) => {
-  console.log(arrayValores)
+
   arrayValores.forEach((item) => {
     let opciones = document.createElement('OPTION')
 
     opciones.value = item;
     opciones.text = item;
     fragment.append(opciones)
+    console.log(opciones.value)
   })
   return fragment
 }
 
 const pintarPelis = (arrayPelis) => {
+  contenedorPelis.innerHTML = '';
   arrayPelis.forEach((item) => {
-    let opciones = document.createElement('OPTION')
+    let parrafoPelis = document.createElement('TR')
+    let tituloPelis = document.createElement('TD')
+    let directorPelis = document.createElement('TD')
+    let anioPelis = document.createElement('TD')
+    let generoPelis = document.createElement('TD')
 
-    opciones.value = item;
-    opciones.text = item
-    fragment.append(opciones)
+    tituloPelis.textContent = item.titulo;
+    directorPelis.textContent = item.director;
+    anioPelis.textContent = item.anio;
+    generoPelis.textContent = item.genero;
+    
+    parrafoPelis.append(tituloPelis)
+    parrafoPelis.append(directorPelis)
+    parrafoPelis.append(anioPelis)
+    parrafoPelis.append(generoPelis)
+    fragment.append(parrafoPelis)
   })
-
-  return fragment
-}
+  contenedorPelis.append(fragment)
+};
 
 /// INVOCACIONES --->>>
 
-genero.append(crearOption('Elija género', ...arrayGeneros))
+contenedorPelis.append(fragment);
+genero.append(crearOption('Elija género', ...arrayGeneros));
 listaGeneros.append(crearOption('Filtra por género', ...arrayGeneros))
