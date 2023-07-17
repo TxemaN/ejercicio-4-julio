@@ -1,88 +1,140 @@
+
+/// VARIABLES --->>>
+
 const form = document.querySelector("#pelisForm")
 const boton = document.querySelector('#boton')
-
-const titulo = document.querySelector('#titulo');
-const director = document.querySelector('#director');
-const anio = document.querySelector('#anio');
-const errores = document.querySelector('#listaErrores');
-const regExp ={
-    expresionTitulo: /[a-zÑ-ÿ0-9\-\_\*\+\@\#\~\$\,\´]+$/i, // Corrección en la expresión. Estaba incompleta.
-    expresiondirector: /[a-zÑ-ÿ]/i, // Corrección en la expresión.
-}
-
-const fragmentPelis = document.createDocumentFragment();
-
+const genero = document.querySelector('#genero')
+const listaGeneros = document.querySelector('#listaGeneros')
+const listaErrores = document.querySelector('#listaErrores');
 const contenedorPelis = document.querySelector("#contenedor-pelis");
 
+const regExp = {
+  titulo: /[a-zA-Z0-9\s]/i,
+  director: /^[a-zA-Z\s]/i,
+  anio: /^\d{4}$/
+};
+
+const fragment = document.createDocumentFragment();
 
 
-const arrayPelisUsuario = [{}]
+/// ARRAYS --->>>
 
-let elemento = {
-  titulo: "",
-  director: "",
-  anio: "",
-  genero: "",
-}
+const arrayPelis = [];
 
-form.addEventListener('submit',(ev)=>{
-		ev.preventDefault()
-		validar();
-   empujar();
-  let mensaje = ''
-    const titulo = titulo.value;
-    const director = director.value;
-    const anio = anio.value;
-	});
- if (titulo.length == 0) {
-        mensaje += '<li>No has nombrado película<li>'
-    }
-    if (director.length == 0) {
-        mensaje += '<li>No has nombrado director<li>'
-    }
-    if (anio < 1800 || anio > 2023) {
-        mensaje += '<li>Año incorrecto<li>'
-    }
-    if (mensaje !=''){
-        errores.innerHTML=mensaje
-}else {
-    
-}
+const arrayGeneros = ['Terror', 'Comedia', 'Romántica', 'Drama'];
 
- 
+
+/// EVENTOS --->>>
+
+form.addEventListener('submit', (ev) => {
+  ev.preventDefault()
+  const validado = validar();
+  if (validado) almacenarPelis() //cuando una if solo ejecuta UNA instruccion no necesita {}
+  pintarPelis(arrayPelis)
 });
 
-
-//Aquí empujamos los datos de la pel al array//
-const empujar = () => {
-
-  elemento.titulo = document.getElementById("titulo").value;
-  elemento.director = document.getElementById("director").value;
-  elemento.anio = document.getElementById("anio").value;
-  elemento.genero = document.getElementById("genero").value;
-  arrayPelisUsuario + arrayPelisUsuario.push(elemento)
+listaGeneros.addEventListener('change', (ev) => {
+  if (ev.target.matches('#listaGeneros')) {
+    filtrarPorGenero(ev.target.value)
+    console.log(crearOption)
+}
+})
 
 
-console.log(arrayPelisUsuario,elemento)
-		
-		
+/// FUNCIONES --->>>
+
+const validar = () => {
+
+  let mensaje = ''
+  const titulo = document.querySelector('#titulo').value;
+  const director = document.querySelector('#director').value;
+  const anio = document.querySelector('#anio').value;
+
+  const anioActual = new Date().getFullYear()
+
+  if (!regExp.titulo.test(titulo)) {
+    mensaje += '<li>No has nombrado película<li>'
+  }
+  if (!regExp.director.test(director)) {
+    mensaje += '<li>No has nombrado director<li>'
+  }
+  if (!regExp.anio.test(anio) || (anio < 1800 || anio > anioActual)) {
+    mensaje += '<li>Año incorrecto<li>'
+  }
+  if (mensaje != '') {
+    listaErrores.innerHTML = mensaje
+  } else {
+    return true;
+  }
 }
 
-//Aquí usamos el array de pelis para las tablas con las pelis, el género, año...//
-const pintarPelis = () => {
-  arrayPelisUsuario.forEach((item) => {
 
-    document.getElementById("tituloTabla").textContent=item.titulo;
-    document.getElementById("directorTabla").textContent=item.director;
-    document.getElementById("anioTabla").textContent=item.anio;
-    document.getElementById("generoTabla").textContent=item.genero;
+const almacenarPelis = () => {
 
+  const storedTitulo = document.querySelector('#titulo')
+  const storedDirector = document.querySelector('#director')
+  const storedAnio = document.querySelector('#anio')
+  const storedGenero = document.querySelector('#genero')
 
-    peli.append(datoPeli);
+  const pelicula = {
+    titulo: storedTitulo.value,
+    director: storedDirector.value,
+    anio: storedAnio.value,
+    genero: storedGenero.value
+  }
+  if (arrayPelis != 'Filtra por género') {
+    arrayPelis.push(pelicula)
+  }
+  form.reset()
+}
 
-    fragment.append(peli);
+const crearOption = (...arrayValores) => {
+
+  arrayValores.forEach((item) => {
+    let opciones = document.createElement('OPTION')
+
+    opciones.value = item;
+    opciones.text = item;
+    fragment.append(opciones)
+    console.log(opciones.value)
   })
-  contenedorPelis.append(fragment);
+  return fragment
 }
 
+const pintarPelis = (arrayPelis) => {
+  contenedorPelis.innerHTML = '';
+  arrayPelis.forEach((item) => {
+    let parrafoPelis = document.createElement('TR')
+    let tituloPelis = document.createElement('TD')
+    let directorPelis = document.createElement('TD')
+    let anioPelis = document.createElement('TD')
+    let generoPelis = document.createElement('TD')
 
+    tituloPelis.textContent = item.titulo;
+    directorPelis.textContent = item.director;
+    anioPelis.textContent = item.anio;
+    generoPelis.textContent = item.genero;
+    
+    parrafoPelis.append(tituloPelis)
+    parrafoPelis.append(directorPelis)
+    parrafoPelis.append(anioPelis)
+    parrafoPelis.append(generoPelis)
+    fragment.append(parrafoPelis)
+  })
+  contenedorPelis.append(fragment)
+};
+
+const filtrarPorGenero = (generoSeleccionado) => {
+  if (generoSeleccionado === 'Filtra por género') {
+    pintarPelis(arrayPelis)
+  } else {
+    const pelisFiltradas = arrayPelis.filter((pelicula) => pelicula.genero === generoSeleccionado);
+    pintarPelis(pelisFiltradas);
+  }
+}
+
+/// INVOCACIONES --->>>
+
+contenedorPelis.append(fragment);
+genero.append(crearOption('Elija género', ...arrayGeneros));
+listaGeneros.append(crearOption('Filtra por género', ...arrayGeneros))
