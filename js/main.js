@@ -34,8 +34,8 @@ form.addEventListener('submit', (ev) => {
 });
 
 listaGeneros.addEventListener('change', (ev) => {
-  if (ev.target.matches('listaGeneros')) {
-    crearOption(opciones.value)
+  if (ev.target.matches('#listaGeneros')) {
+    filtrarPorGenero(ev.target.value)
     console.log(crearOption)
 }
 })
@@ -123,6 +123,15 @@ const pintarPelis = (arrayPelis) => {
   })
   contenedorPelis.append(fragment)
 };
+
+const filtrarPorGenero = (generoSeleccionado) => {
+  if (generoSeleccionado === 'Filtra por género') {
+    pintarPelis(arrayPelis)
+  } else {
+    const pelisFiltradas = arrayPelis.filter((pelicula) => pelicula.genero === generoSeleccionado);
+    pintarPelis(pelisFiltradas);
+  }
+}
 
 /// INVOCACIONES --->>>
 
